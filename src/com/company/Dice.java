@@ -5,8 +5,13 @@ import java.util.Random;
 public class Dice {
     private int score;
     private int penalty;
-     Random random=new Random();
-     int  number= random.nextInt(1, 7);
+    private int number;
+
+    public Dice() {
+        Random random=new Random();
+        this.number= random.nextInt(1, 7);
+    }
+
     public  void throwADice(){
        switch (number){
            case 1:
