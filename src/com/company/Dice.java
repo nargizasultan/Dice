@@ -5,6 +5,7 @@ import java.util.Stack;
 
 public class Dice {
     private int score;
+    private int penalty;
 
     private int number;
     static Stack<Integer> usersStack = new Stack<>();
@@ -63,5 +64,11 @@ public class Dice {
         this.number = number;
     }
 
+    public int getPenalty() {
+        return penalty;
+    }
 
+    public void setPenalty(int penalty) {
+        this.penalty = penalty;
+    }
 }
