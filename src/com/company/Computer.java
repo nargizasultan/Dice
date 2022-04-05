@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Computer extends Dice {
     Random random = new Random();
-    int randomComputerNumber = random.nextInt(2, 12);
+    int randomComputerNumber = random.nextInt(12);
 
     public int getRandomComputerNumber() {
         return randomComputerNumber;
