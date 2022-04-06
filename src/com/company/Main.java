@@ -8,10 +8,14 @@ import static com.company.Dice.*;
 public class Main {
 
     public static void main(String[] args) {
+
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
         Scanner scanner1 = new Scanner(System.in);
+
+
         int penalty = 0;
+
 
         for (int i = 0; i < 2; i++) {
 
@@ -21,6 +25,7 @@ public class Main {
             System.out.print("Predict amount of points(2..12): ");
             int input = scanner.nextInt();
             exception(input);
+
             System.out.println("Do u want to cheat? Y/N");
             String choice = scanner1.nextLine();
             Dice dice1 = new Dice();
@@ -95,7 +100,9 @@ public class Main {
             }
             System.out.println();
         }
+        int penalty1=0;
         for (int i = 0; i < 3; i++) {
+
             if (i == 0) {
                 System.out.println("-------Start game--------");
                 System.out.println("         Round 3 (1)         ");
@@ -125,7 +132,7 @@ public class Main {
                     getRandomForCheating(dice3, dice4, input1);
                 } else {
                     getRandom(dice3, dice4);
-                    penalty++;
+                    penalty1++;
                 }
             } else {
                 getRandom(dice3, dice4);
@@ -137,8 +144,15 @@ public class Main {
             thirdStageUsers.push(total2);
             System.out.printf("On the dice fell %d points.\n", total2);
             int x3 = total2 - Math.abs(total2 - input1) * 2;
-
             thirdStageUsers.push(x3);
+
+            if (penalty1 < 1) {
+                System.out.printf("Result is %d - abs(%d-%d)*2: %d points\n ", total2, total2, input1, x3);
+            } else {
+                System.out.printf("Result is %d - abs(%d-%d)*2: %d points\n ", total2, total2, input1, x3 - 10);
+            }
+
+
 
             System.out.println();
             Dice dice5 = new Dice();
@@ -154,13 +168,19 @@ public class Main {
             thirdStageComp.push(total3);
             System.out.printf("On the dice fell %d points\n", total3);
             int x4 = total3 - Math.abs(total3 - computer1.getRandomComputerNumber()) * 2;
+            System.out.printf("Result is %d - abs(%d-%d)*2: %d points\n ", total3, total3, computer1.getRandomComputerNumber(), x4);
             thirdStageComp.push(x4);
 
             System.out.println();
             System.out.println("----------Current score------------");
-            System.out.printf("User: %d points\n", (penalty < 1) ? x3 : x3 - 10);
+            System.out.printf("User: %d points\n", (penalty < 1) ? x3 : x3-10);
             System.out.printf("Computer: %d points\n", x4);
-            System.out.printf(x3 > x4 ? "User is ahead by " + (x3 - x4) + " points\n" : "Computer is ahead by " + (x4 - x3) + " points\n");
+            if((penalty < 1)){
+                System.out.printf(x3 > x4 ? "User is ahead by " + (x3 - x4) + " points\n" : "Computer is ahead by " + (x4 - x3) + " points\n");
+            }else{
+                System.out.printf(x3-10 > x4 ? "User is ahead by " + ((x3-10) - x4)+ " points\n" : "Computer is ahead by " + (x4 - (x3-10)) + " points\n");
+            }
+
             System.out.println("------------------------------------");
             System.out.println();
 
@@ -232,12 +252,9 @@ public class Main {
         }
     }
     public static void exception(int input) {
-        try {
+
             if (input < 2 || input > 12) {
-                throw new InvalidNumberException();
+                System.err.printf("Number %d if not valid\n", input);
             }
-        } catch (InvalidNumberException e) {
-            System.err.printf("Number %d if not valid\n", input);
-        }
     }
 }
